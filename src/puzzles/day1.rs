@@ -4,7 +4,7 @@ pub fn day1_1(input: String) -> String {
     let mut sum: i32 = 0;
     for line in input.lines() {
         if line.len() == 0 {
-            continue
+            continue;
         }
         let val = get_number(line);
         sum += val;
@@ -36,7 +36,7 @@ pub fn day1_2(input: String) -> String {
     let mut freqs: HashSet<i32> = HashSet::new();
     for line in input.lines().cycle() {
         if line.len() == 0 {
-            continue
+            continue;
         }
         let val = get_number(line);
         sum += val;

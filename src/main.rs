@@ -20,6 +20,7 @@ fn main() {
 
     advents.insert("1_1", day1_1);
     advents.insert("1_2", day1_2);
+    advents.insert("2_1", day2_1);
 
     let yaml = load_yaml!("args.yaml");
     let matches = App::from_yaml(yaml).get_matches();
