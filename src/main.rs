@@ -19,6 +19,7 @@ fn main() {
     let mut advents: BTreeMap<&str, fn(String) -> String> = BTreeMap::new();
 
     advents.insert("1_1", day1_1);
+    advents.insert("1_2", day1_2);
 
     let yaml = load_yaml!("args.yaml");
     let matches = App::from_yaml(yaml).get_matches();
