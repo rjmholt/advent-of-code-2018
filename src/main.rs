@@ -1,18 +1,24 @@
 #[macro_use]
 extern crate clap;
 
+#[macro_use]
+extern crate rust_embed;
+
+mod puzzles;
+
+use std::borrow::Cow;
 use std::collections::BTreeMap;
 use clap::App;
+use puzzles::*;
 
-fn example(input: String) -> String
-{
-    return input;
-}
+#[derive(RustEmbed)]
+#[folder = "input/"]
+struct Input;
 
 fn main() {
     let mut advents: BTreeMap<&str, fn(String) -> String> = BTreeMap::new();
 
-    advents.insert("0", example);
+    advents.insert("1_1", day1_1);
 
     let yaml = load_yaml!("args.yaml");
     let matches = App::from_yaml(yaml).get_matches();
@@ -36,6 +42,15 @@ fn main() {
     };
 
     for day in days_to_run {
-        println!("{}", day);
+        let file_name: String = format!("{}.txt", day);
+        let file_result: Option<Cow<'static, [u8]>> = Input::get(&file_name);
+        let file_bytes = file_result.unwrap();
+        let file_contents: String = std::str::from_utf8(file_bytes.as_ref()).unwrap().to_string();
+
+        let puzzle_fn: &fn(String) -> String = advents.get(day).unwrap();
+
+        let solution = puzzle_fn(file_contents);
+
+        println!("Puzzle {}: {}", day, solution);
     }
 }
