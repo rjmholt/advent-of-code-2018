@@ -1,0 +1,14 @@
+name: advent-of-code-2018
+version: "0.1.0"
+author: rjmholt
+args:
+  - days:
+      index: 1
+      short: d
+      long: days
+      multiple: true
+      takes_value: true
+      help: |
+        Which advent puzzles to run.
+        Each day has two puzzles, such as "1_1" and "1_2".
+        Omitting this parameter will run all puzzles.
